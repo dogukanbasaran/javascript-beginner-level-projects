@@ -59,15 +59,23 @@ const validateEmail = () => {
 const validateMessage = () => {
     let message = document.getElementById("contact-message").value;
     let required = 30;
-    let left = required - message.length;
+    let limit = 100;
+    let messageLength = message.length;
+    let left =required - messageLength;
+    let exceeded = messageLength - limit;
 
-    if(left > 0){
+    if(messageLength >= limit){
+        messageError.innerHTML = `${exceeded} characters exceeded the limit of ${limit}.`;
+    }
+
+    else if(left > 0){
         messageError.innerHTML = `${left} more characters is required`;
         return false;
     }
-
-    messageError.innerHTML = "<i style='color:seagreen; font-size: 20px' class='fas fa-check-circle'></i>";
-    return true;
+    else{
+        messageError.innerHTML = "<i style='color:seagreen; font-size: 20px' class='fas fa-check-circle'></i>";
+        return true;
+    }
 
 }
 
